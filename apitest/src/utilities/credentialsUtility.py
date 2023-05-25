@@ -24,6 +24,7 @@ class CredentialsUtility(object):
         wc_key = os.environ.get('WC_API_KEY')
         wc_secret = os.environ.get('WC_API_SECRET')
 
+
         if not wc_key or not wc_secret:
             raise Exception('The WC_API_KEY and WC_API_SECRET must be set in env variables')
         else:

@@ -1,6 +1,6 @@
 from apitest.src.utilities.genericUtilities import generate_random_email_and_password
-
 from apitest.src.utilities.requestsUtility import RequestsUtility
+
 
 class CustomerHelper():
 
@@ -49,6 +49,6 @@ class CustomerHelper():
         payload['password'] = password
         payload.update(kwargs)
 
-        create_user_json = self.requests_utility.post('tests_customers', payload=payload, expected_status_code=201)
+        create_user_json = self.requests_utility.post('customers', payload=payload, expected_status_code=201)
 
         return True
