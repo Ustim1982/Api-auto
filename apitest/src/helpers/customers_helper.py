@@ -5,14 +5,14 @@ from apitest.src.utilities.requestsUtility import RequestsUtility
 class CustomerHelper():
 
     """
-       A helper class for interacting with customer-related operations.
+    A helper class for interacting with customer-related operations.
 
-       Methods:
-       - create_customer: Create a customer with the provided email, password, and additional details.
+    Methods:
+    - create_customer: Create a customer with the provided email, password, and additional details.
 
-       Attributes:
-       - requests_utility: An instance of the RequestsUtility class for making HTTP requests.
-       """
+    Attributes:
+    - requests_utility: An instance of the RequestsUtility class for making HTTP requests.
+    """
 
     def __init__(self):
         """
@@ -24,19 +24,19 @@ class CustomerHelper():
 
     def create_customer(self, email=None, password=None, **kwargs):
         """
-         Create a customer with the provided email, password, and additional details.
+        Create a customer with the provided email, password, and additional details.
 
-         Args:
-         - email (str): The email address of the customer. If not provided, a random email will be generated.
-         - password (str): The password of the customer. If not provided, a default password will be used.
-         - **kwargs: Additional keyword arguments for specifying additional customer details.
+        Args:
+        - email (str): The email address of the customer. If not provided, a random email will be generated.
+        - password (str): The password of the customer. If not provided, a default password will be used.
+        - **kwargs: Additional keyword arguments for specifying additional customer details.
 
-         Returns:
-         - bool: True if the customer creation was successful.
+        Returns:
+        - dict: The JSON response from the API.
 
-         Raises:
-         - None
-         """
+        Raises:
+        - None
+        """
         if not email:
             ep = generate_random_email_and_password()
             email = ep['email']
@@ -51,4 +51,4 @@ class CustomerHelper():
 
         create_user_json = self.requests_utility.post('customers', payload=payload, expected_status_code=201)
 
-        return True
+        return create_user_json
