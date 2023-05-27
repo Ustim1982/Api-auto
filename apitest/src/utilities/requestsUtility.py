@@ -61,7 +61,6 @@ class RequestsUtility(object):
         """
         if not headers:
             headers = {'Content-Type': 'application/json'}
-
         self.url = self.base_url + endpoint
         rs_api = requests.post(url=self.url, data=json.dumps(payload), headers=headers, auth=self.auth)
         self.status_code = rs_api.status_code
@@ -69,16 +68,24 @@ class RequestsUtility(object):
         self.rs_json = rs_api.json()
         self.assert_status_code()
 
-        logger.debug(f"API Response: {self.rs_json}")
+        logger.debug(f"POST API Response: {self.rs_json}")
         return self.rs_json
 
-    def get(self):
+    def get(self, endpoint, payload=None, headers=None, expected_status_code=200):
         """
         Sends a GET request.
 
         Returns:
             Response: The response object returned from the GET request.
         """
+        if not headers:
+            headers = {'Content-Type': 'application/json'}
+        self.url = self.base_url + endpoint
+        rs_api = requests.get(url=self.url, data=json.dumps(payload), headers=headers, auth=self.auth)
+        self.status_code = rs_api.status_code
+        self.expected_status_code = expected_status_code
+        self.rs_json = rs_api.json()
+        self.assert_status_code()
 
-        import requests
-        return requests.get()
+        logger.debug(f"GET API Response: {self.rs_json}")
+        return self.rs_json
