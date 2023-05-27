@@ -37,9 +37,12 @@ def test_create_customer_only_email_password():
     assert customer_api_info['first_name'] == '', f"Create customer api returns wrong first name." \
                                                   f"Expected empty string but actual {customer_api_info['first_name']}"
 
-
-    # verify customer is created in DB
+    # verify customer is created in DB (by verifying the id)
     cust_dao = CustomersDAO()
-    cust_info = cust_dao.get_customer_by_email(email)
+    customer_db_info = cust_dao.get_customer_by_email(email)
 
-    import pdb; pdb.set_trace()
+    id_in_api = customer_api_info['id']
+    id_in_db = customer_db_info[0]['ID']
+    assert id_in_api == id_in_db, f"Create customer response 'id' does not match the 'ID' in DB"\
+                                  f"User Email: {email}"\
+                                  f"Expected id {id_in_db} but actual {id_in_api}"
