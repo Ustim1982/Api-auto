@@ -21,7 +21,6 @@ class RequestsUtility(object):
         """
         Initializes a new instance of the RequestsUtility class.
         """
-
         wc_creds = CredentialsUtility.get_wc_api_key()
         self.env = os.environ.get('ENV', 'test')
         self.base_url = API_HOSTS[self.env]
@@ -73,10 +72,19 @@ class RequestsUtility(object):
 
     def get(self, endpoint, payload=None, headers=None, expected_status_code=200):
         """
-        Sends a GET request.
+        Sends a GET request to the specified endpoint.
+
+        Args:
+            endpoint (str): The endpoint to send the request to.
+            payload (dict): The payload data to include in the request body.
+            headers (dict): The headers to include in the request.
+            expected_status_code (int): The expected status code for the response.
 
         Returns:
-            Response: The response object returned from the GET request.
+            dict: The JSON response from the API.
+
+        Raises:
+            AssertionError: If the status code of the response does not match the expected status code.
         """
         if not headers:
             headers = {'Content-Type': 'application/json'}
