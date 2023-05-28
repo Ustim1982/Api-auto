@@ -36,10 +36,10 @@ class RequestsUtility(object):
         """
 
         assert self.status_code == int(self.expected_status_code), \
-            f"Bad status code" \
-            f"Expected status code {self.expected_status_code}" \
-            f"Actual status code {self.status_code}" \
-            f"URL: {self.url}" \
+            f"Bad status code, " \
+            f"Expected status code {self.expected_status_code}, " \
+            f"Actual status code {self.status_code}, " \
+            f"URL: {self.url}, " \
             f"Response JSON: {self.rs_json}"
 
     def post(self, endpoint, payload=None, headers=None, expected_status_code=200):
